@@ -14,8 +14,8 @@ local keymap = vim.api.nvim_set_keymap
 --   command_mode = "c",
 
 -- Normal --
-keymap("n", "XX",
-       ":FloatermNew --autoclose=0 g++ -g % -o ./bin/%< && ./bin/%< <CR>", opts)
+keymap("n", "XX", ":FloatermNew --autoclose=0 g++ -g % -o ./%< && ./%< <CR>",
+       opts)
 keymap("n", "XE", ":FloatermNew --autoclose=1 g++ -g % -o ./bin/%<<CR>", opts)
 keymap("n", "<F7>", ":lua require('dapui').toggle()<CR>", opts)
 

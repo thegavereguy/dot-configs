@@ -55,7 +55,6 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'mfussenegger/nvim-lint'
 
 Plug 'Civitasv/cmake-tools.nvim'
-
 -- completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -101,5 +100,14 @@ Plug 'edKotinsky/Arduino.nvim'
 
 -- orgmode
 Plug 'nvim-orgmode/orgmode'
+
+-- copilot
+Plug 'zbirenbaum/copilot.lua'
+Plug 'zbirenbaum/copilot-cmp'
+
+-- Comment
+Plug 'numToStr/Comment.nvim'
+
+Plug 'nvim-neotest/nvim-nio'
 
 vim.call('plug#end')
