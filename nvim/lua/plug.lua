@@ -14,6 +14,7 @@ Plug 'onsails/lspkind.nvim'
 
 Plug 'lunarvim/horizon.nvim'
 Plug 'nyoom-engineering/oxocarbon.nvim'
+Plug 'catppuccin/nvim'
 -- Plug ('sonph/onehalf', { rtp =  'vim' })
 
 -- Status line
@@ -36,7 +37,7 @@ Plug 'folke/trouble.nvim'
 
 -- Telescope
 Plug 'nvim-lua/plenary.nvim'
-Plug('nvim-telescope/telescope.nvim', {tag = '0.1.x'})
+Plug('nvim-telescope/telescope.nvim', {tag = '0.1.8'})
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'BurntSushi/ripgrep'
 Plug 'sharkdp/fd'
@@ -100,7 +101,7 @@ Plug 'stevearc/vim-arduino'
 Plug 'edKotinsky/Arduino.nvim'
 
 -- orgmode
-Plug 'nvim-orgmode/orgmode'
+-- Plug 'nvim-orgmode/orgmode'
 
 -- copilot
 Plug 'zbirenbaum/copilot.lua'

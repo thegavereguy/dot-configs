@@ -1,4 +1,4 @@
-vim.api.nvim_command('colorscheme horizon')
+vim.api.nvim_command('colorscheme catppuccin')
 
 local Command = vim.api.nvim_command
 

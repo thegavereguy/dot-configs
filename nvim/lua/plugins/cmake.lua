@@ -130,7 +130,7 @@ require("cmake-tools").setup {
     },
     cmake_notifications = {
         runner = {enabled = false},
-        executor = {enabled = true},
+        executor = {enabled = false},
         spinner = {
             "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"
         }, -- icons used for progress display
