@@ -44,7 +44,9 @@ require("formatter").setup {
         json = {require("formatter.filetypes.json").jq},
         html = {require("formatter.filetypes.html").prettierd},
         markdown = {require("formatter.filetypes.markdown").prettierd},
-        go = {require("formatter.filetypes.go").gofmt}
+        go = {require("formatter.filetypes.go").gofmt},
+        sh = {require("formatter.filetypes.sh").shfmt}
 
     }
+
 }
