@@ -1,4 +1,4 @@
-vim.api.nvim_command('colorscheme horizon')
+vim.api.nvim_command('colorscheme catppuccin')
 
 local Command = vim.api.nvim_command
 
@@ -27,3 +27,6 @@ Command('hi DiagnosticUnderlineHint gui=underline') -- colore tipo unità
 Command('hi DiagnosticUnderlineInfo gui=underline') -- colore tipo unità
 
 Command('hi FloatBorder guifg=#ffffff')
+
+Command('hi LspDiagnosticsVirtualTextHint guifg=#ffffff') -- colore testo suggerimento
+Command('hi DiagnosticsVirtualTextHint guifg=#ffffff') -- colore testo suggerimento

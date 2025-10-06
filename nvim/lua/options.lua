@@ -28,6 +28,9 @@ Options.foldmethod = "expr"
 Options.foldexpr = "nvim_treesitter#foldexpr()"
 Options.foldenable = false
 
+global.mapleader = " "
+global.maplocalleader = "\\"
+
 if global.neovide then global.neovide_scale_factor = 0.8 end
 
 -- Formatters options
@@ -62,6 +65,9 @@ local autoCommands = {
 }
 
 M.nvim_create_augroups(autoCommands)
+
+-- Da problemi con cmaketools, notifica persistente dopo esecuzione
+-- vim.notify = require("notify")
 
 -- lsp diagnostics
 -- vim.diagnostic.config({virtual_lines = {only_current_line = true}})

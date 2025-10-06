@@ -1,10 +1,14 @@
-local apairs = require("nvim-autopairs")
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local cmp = require('cmp')
+return {
+    {
+        "windwp/nvim-autopairs",
+        config = function()
+            local apairs = require("nvim-autopairs")
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            local cmp = require('cmp')
 
-apairs.setup{}
+            apairs.setup {}
 
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
+            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+        end
+    }
+}

@@ -1,1 +1,1 @@
-require("dressing").setup()
+return {{"stevearc/dressing.nvim", opts = {}}}
