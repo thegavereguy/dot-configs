@@ -79,7 +79,7 @@ keymap("n", "<leader>sw", ":Lspsaga show_workspace_diagnostics<CR>", opts)
 keymap("n", "K", ":Lspsaga hover_doc<CR>", opts)
 keymap("n", "<leader>o", ":Lspsaga outline<CR>", opts)
 -- keymap("n", "<A-t>", ":Lspsaga term_toggle<CR>", opts)
-keymap("n", "<A-t>", ":FloatermToggle<CR>", opts)
+keymap("n", "<A-d>", ":FloatermToggle<CR>", opts)
 
 -- CMakeTools
 keymap("n", "<leader>cmr", ":CMakeRun<CR>", opts)

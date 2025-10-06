@@ -28,6 +28,9 @@ Options.foldmethod = "expr"
 Options.foldexpr = "nvim_treesitter#foldexpr()"
 Options.foldenable = false
 
+global.mapleader = " "
+global.maplocalleader = "\\"
+
 if global.neovide then global.neovide_scale_factor = 0.8 end
 
 -- Formatters options
