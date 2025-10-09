@@ -42,6 +42,7 @@ global.rust_raccomended_style = 0;
 -- floaterm
 global.floaterm_borderchars = "─│─│╭╮╯╰"
 global.floaterm_keymap_kill = 'Q'
+global.floaterm_keymap_toggle = '<leader>d'
 
 -- autocommands
 local api = vim.api

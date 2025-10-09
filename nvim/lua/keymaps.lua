@@ -4,7 +4,7 @@ local opts = {noremap = true, silent = true}
 local keymap = vim.api.nvim_set_keymap
 local autocommand = vim.api.nvim_create_autocmd
 -- Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
+-- keymap("", "<Space>", "<Nop>", opts)
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -51,7 +51,7 @@ keymap("n", "<leader>g", ":LazyGit<CR>", opts)
 -- autocommand({"BufReadPost", "FileReadPost"}, {command = "zR"})
 
 -- Insert --
-keymap("i", "<F12>", "~", opts)
+-- keymap("i", "<F12>", "~", opts)
 
 -- Navigate tags
 keymap("n", "tt", ":tabnew ", {noremap = true})
@@ -79,7 +79,7 @@ keymap("n", "<leader>sw", ":Lspsaga show_workspace_diagnostics<CR>", opts)
 keymap("n", "K", ":Lspsaga hover_doc<CR>", opts)
 keymap("n", "<leader>o", ":Lspsaga outline<CR>", opts)
 -- keymap("n", "<A-t>", ":Lspsaga term_toggle<CR>", opts)
-keymap("n", "<A-d>", ":FloatermToggle<CR>", opts)
+-- keymap("n", "<leader>d", ":FloatermToggle<CR>", opts)
 
 -- CMakeTools
 keymap("n", "<leader>cmr", ":CMakeRun<CR>", opts)
