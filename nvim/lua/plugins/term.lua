@@ -1,1 +1,6 @@
-return {{"voldikss/vim-floaterm"}, {"akinsho/toggleterm.nvim"}}
+return {
+    {
+        "voldikss/vim-floaterm"
+        -- keys = {"<leader>", "t", ":FloatermToggle<CR>", desc = {"floaterm"}}
+    }, {"akinsho/toggleterm.nvim"}
+}
