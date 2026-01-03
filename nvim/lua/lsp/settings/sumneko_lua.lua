@@ -12,8 +12,8 @@ return {
 				},
 			},
 			completion = {
-				callSlippet = "Replace"
-			}
+				callSlippet = "Replace",
+			},
 		},
 	},
 }

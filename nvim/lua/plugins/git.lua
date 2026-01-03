@@ -1,1 +1,1 @@
-return {{"kdheepak/lazygit.nvim"}, {"f-person/git-blame.nvim"}}
+return { { "kdheepak/lazygit.nvim" }, { "f-person/git-blame.nvim" } }

@@ -1,6 +1,6 @@
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 
-local term_opts = {silent = true}
+local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -22,4 +22,3 @@ keymap("n", "<F5>", ":lua require('dap').toggle_breakpoint()<CR>", opts)
 keymap("n", "<F6>", ":lua require('dap').continue()<CR>", opts)
 keymap("n", "<F11>", ":lua require('dap').step_over()<CR>", opts)
 keymap("n", "<F10>", ":lua require('dap').step_into()<CR>", opts)
-

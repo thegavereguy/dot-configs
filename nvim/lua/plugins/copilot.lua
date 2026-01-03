@@ -1,1 +1,1 @@
-return {{"zbirenbaum/copilot.lua", opts = {}}}
+return { { "zbirenbaum/copilot.lua", opts = {} } }

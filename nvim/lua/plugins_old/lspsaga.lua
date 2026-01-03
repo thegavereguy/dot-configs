@@ -1,16 +1,16 @@
 local keymap = vim.keymap.set
 
-require("lspsaga").setup{
+require("lspsaga").setup({
 	ui = {
 		theme = "round",
 		title = true,
 		border = "rounded",
-		winblend = 0
+		winblend = 0,
 	},
 	lightbulb = {
 		enable = false,
-	}
-}
+	},
+})
 
 --keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
 --keymap({"n","v"}, "ca", "<cmd>Lspsaga code_action<CR>")
@@ -36,7 +36,6 @@ require("lspsaga").setup{
 
 -- Go to type definition
 --keymap("n","gt", "<cmd>Lspsaga goto_type_definition<CR>")
-
 
 -- Show line diagnostics
 -- You can pass argument ++unfocus to
@@ -70,4 +69,4 @@ keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
 -- Floating terminal
-keymap({"n", "t"}, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
+keymap({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")

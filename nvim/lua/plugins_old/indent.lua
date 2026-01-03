@@ -1,4 +1,3 @@
-local indent = require('ibl')
+local indent = require("ibl")
 
-indent.setup {scope = {enabled = true}}
-
+indent.setup({ scope = { enabled = true } })

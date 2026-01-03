@@ -7,14 +7,14 @@
 -- if not status_ok then
 --	return
 -- end
-local mason = require('mason')
-local mason_lspconfig = require('mason-lspconfig')
-local lspconfig = require('lspconfig')
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local lspconfig = require("lspconfig")
 
 mason.setup()
-mason_lspconfig.setup {
-    automatic_enable = true
-}
+mason_lspconfig.setup({
+	automatic_enable = true,
+})
 
 -- mason_lspconfig.setup_handlers {
 -- 	function(server)
