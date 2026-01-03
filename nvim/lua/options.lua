@@ -72,3 +72,9 @@ M.nvim_create_augroups(autoCommands)
 
 -- lsp diagnostics
 -- vim.diagnostic.config({virtual_lines = {only_current_line = true}})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})

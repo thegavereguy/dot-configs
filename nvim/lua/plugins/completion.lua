@@ -4,8 +4,7 @@ return {
         "hrsh7th/nvim-cmp", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-vsnip",
         "hrsh7th/cmp-path", "hrsh7th/cmp-buffer", "hrsh7th/cmp-omni",
         "hrsh7th/cmp-nvim-lsp-signature-help", "saadparwaiz1/cmp_luasnip",
-        "onsails/lspkind.nvim", "L3MON4D3/LuaSnip", "zbirenbaum/copilot.lua",
-        "zbirenbaum/copilot-cmp"
+        "onsails/lspkind.nvim", "L3MON4D3/LuaSnip", "zbirenbaum/copilot-cmp"
     },
     config = function()
         local has_words_before = function()

@@ -1,4 +1,4 @@
-return {
+return { {"stevearc/overseer.nvim", tag = "v1.6.0"},
     {
         "Civitasv/cmake-tools.nvim",
         dependencies = {"stevearc/overseer.nvim"},
