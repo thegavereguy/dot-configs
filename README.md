@@ -1,1 +1,1 @@
-#dot-config thegavereguy
+## dot-configs
