@@ -5,8 +5,9 @@
   font-size: 13px;
 }
 
+
 window#waybar {
-  background-color: rgba(43, 48, 59, 0);
+  background-color: #282828;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -26,11 +27,6 @@ background-color: #FFFFFF;
 
 window#waybar.termite {
   background-color: #3f3f3f;
-}
-
-window#waybar.chromium {
-  background-color: #000000;
-  border: none;
 }
 
 button {
@@ -67,11 +63,10 @@ button:hover {
 #image,
 #cava,
 #clock {
-  color: #fac29a;
-  border: 2px solid #fac29a;
-  border-radius: 10px;
-  background-color: #1d1f27;
-  margin-top: 10px;
+  color:#e07123;
+  border-radius: 0px;
+  background-color: #282828;
+  margin-top: 3px;
   padding: 5px 10px 5px 10px;
 }
 #image.album-art {
@@ -81,7 +76,7 @@ button:hover {
 
 #workspaces button {
   background-color: transparent;
-  color: #fac29a;
+  color: #e07123;
   padding-top: 0;
   padding-bottom: 0;
   margin-top: 0;
@@ -97,7 +92,7 @@ button:hover {
 
 #workspaces button.active {
   background-color: rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 -3px #fac29a;
+  box-shadow: inset 0 -3px #e07123;
 }
 
 #workspaces button.urgent {
