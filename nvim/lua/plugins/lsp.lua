@@ -7,7 +7,33 @@ return {
 			require("mason-lspconfig").setup({ automatic_enable = true })
 		end,
 	},
-	{ "neovim/nvim-lspconfig", opt = {} },
+	{
+		"neovim/nvim-lspconfig",
+		opt = {},
+		config = function()
+			vim.lsp.config("tblgen-lsp", {
+				-- The command to launch the server
+				cmd = { "tblgen-lsp-server" },
+
+				-- Root directory detection: looks for a compilation database or git repo
+				root_markers = { "build/tablegen_compile_commands.yml", ".git" },
+
+				filetypes = { "tablegen", "td" },
+				-- Optional: pass include paths if the LSP can't find your .td files
+				settings = {
+					tablegen = {
+						compilationDatabase = "build/tablegen_compile_commands.yml",
+						includeDirs = { "/usr/include", "./include" },
+					},
+				},
+			})
+			vim.lsp.config("mlir-lsp", {
+				cmd = { "mlir-lsp-server" },
+
+				filetypes = { "mlir" },
+			})
+		end,
+	},
 	{
 		"glepnir/lspsaga.nvim",
 
@@ -16,7 +42,7 @@ return {
 				ui = {
 					theme = "round",
 					title = true,
-					border = "rounded",
+					border = "none",
 					winblend = 0,
 				},
 				lightbulb = { enable = false },

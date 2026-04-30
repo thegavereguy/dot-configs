@@ -1,13 +1,16 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			options = {
 				icons_enabled = true,
-				theme = "catppuccin",
-				disabled_filetypes = { "nerdtree" },
+				theme = "gruvbox_dark",
+				disabled_filetypes = { "nerdtree", "snacks_dashboard", "NvimTree" },
 				always_divide_middle = true,
 				globalstatus = false,
+				component_separators = { left = "|", right = "|" },
+				section_separators = { left = "", right = "" },
 			},
 			sections = {
 				lualine_a = { "mode" },

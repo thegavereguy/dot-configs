@@ -1,100 +1,70 @@
 return {
-	"hrsh7th/nvim-cmp",
+	"saghen/blink.cmp",
+	-- optional: provides snippets for the snippet source
 	dependencies = {
-		"hrsh7th/nvim-cmp",
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-vsnip",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-omni",
-		"hrsh7th/cmp-nvim-lsp-signature-help",
-		"saadparwaiz1/cmp_luasnip",
-		"onsails/lspkind.nvim",
-		"L3MON4D3/LuaSnip",
-		"zbirenbaum/copilot-cmp",
+		"rafamadriz/friendly-snippets",
+		{ "L3MON4D3/LuaSnip", version = "v2.*" },
+		"fang2hou/blink-copilot",
 	},
-	config = function()
-		local has_words_before = function()
-			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-		end
-		-- Setup nvim-cmp.
-		local cmp = require("cmp")
-		local lspkind = require("lspkind")
-		local luasnip = require("luasnip")
 
-		lspkind.init({ symbol_map = { Copilot = "" } })
+	version = "1.*",
+	opts = {
 
-		cmp.setup({
-			snippet = {
-				expand = function(args)
-					luasnip.lsp_expand(args.body) -- For `luasnip` users.
-				end,
-			},
-			mapping = cmp.mapping.preset.insert({
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-j>"] = cmp.mapping.select_next_item(),
-				["<C-k>"] = cmp.mapping.select_prev_item(),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		-- Disable cmdline
+		cmdline = { enabled = false },
 
-				["<Tab>"] = cmp.mapping(function(fallback) -- navigazione campi  snippet
-					if luasnip.expand_or_locally_jumpable() then
-						luasnip.expand_or_jump()
-					elseif has_words_before() then -- togliere questo se da fastitidio mettere TAB dopo un testo
-						cmp.complete()
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
+		completion = {
+			keyword = { range = "full" },
 
-				["<S-Tab>"] = cmp.mapping(function(fallback) -- stessa roba ma al contrario
-					if luasnip.jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
-			}),
+			accept = { auto_brackets = { enabled = false } },
 
-			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
-			},
+			-- Don't select by default, auto insert on selection
+			list = { selection = { preselect = false, auto_insert = true } },
 
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "copilot" },
-				{ name = "nvim_lsp_signature_help" },
-				{ name = "orgmode" },
-				{ name = "luasnip" }, -- For luasnip users.
-				{ name = "crates" },
-				-- { name = 'omni' }			-- may cause of unwanted completion
-			}),
-			formatting = {
-				format = lspkind.cmp_format({
-					maxwidth = 50,
-					mode = "symbol_text",
-					menu = {
-						omni = "[OMNI]",
-						copilot = "[COPILOT]",
-						nvim_lsp = "[LSP]",
-						luasnip = "[LUASNIP]",
-						crates = "[CRATE]",
+			menu = {
+				auto_show = true,
+
+				draw = {
+					columns = {
+						{ "label", "label_description", gap = 1 },
+						{ "kind_icon", "kind", gap = 1 },
 					},
-				}),
+				},
 			},
-			experimental = { ghost_text = true },
-		})
 
-		-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-		cmp.setup.cmdline("/", { sources = { { name = "buffer" } } })
+			-- Show documentation when selecting a completion item
+			documentation = { auto_show = true, auto_show_delay_ms = 500 },
 
-		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-		cmp.setup.cmdline(":", {
-			sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
-		})
-	end,
+			-- Display a preview of the selected item on the current line
+			ghost_text = { enabled = true },
+		},
+		keymap = {
+			["<space-Tab>"] = { "show" },
+			["<C-k>"] = { "select_prev", "fallback" },
+			["<C-j>"] = { "select_next", "fallback" },
+			["<S-k>"] = { "scroll_documentation_up", "fallback" },
+			["<S-j>"] = { "scroll_documentation_down", "fallback" },
+			["<Tab>"] = { "snippet_forward", "fallback" },
+			["<S-Tab>"] = { "snippet_backward", "fallback" },
+			["<Enter>"] = { "accept", "fallback" },
+		},
+
+		sources = {
+			default = { "copilot", "lsp", "path", "snippets" },
+			providers = {
+				copilot = {
+					name = "copilot",
+					module = "blink-copilot",
+					score_offset = 100,
+					async = true,
+				},
+			},
+		},
+
+		snippets = { preset = "luasnip" },
+
+		-- Experimental signature help support
+		signature = { enabled = true },
+	},
+	opts_extend = { "sources.default" },
 }
