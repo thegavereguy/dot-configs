@@ -1,28 +1,22 @@
-# See https://wiki.hyprland.org/Configuring/Monitors/
-monitor=eDP-1,1920x1080@60,0x0,1,mirror
-monitor=HDMI-A-1,1920x1080@60,1920x0,1
+-- See https://wiki.hyprland.org/Configuring/Monitors/
+hl.monitor({
+		output = "eDP-1",
+		mode = "1920x1080@60",
+		pos = "0x0",
+		scale = 1,
+	})
 
-# See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
-# Execute your favorite apps at launch
+-- See https://wiki.hyprland.org/Configuring/Keywords/ for more
+
+-- Execute your favorite apps at launch
 exec-once = waybar & hyprpaper & swaync & hypridle
 
 exec-once=/usr/lib/polkit-kde-authentication-agent-1
 exec-once= systemctl --user enable --now hyprpolkitagent.service
 
-workspace = 1, monitor:eDP-1
-workspace = 2, monitor:eDP-1
-workspace = 3, monitor:eDP-1
-workspace = 4, monitor:eDP-1
-workspace = 5, monitor:eDP-1
 
-# Workspace assignments for Monitor 2 (e.g., DP-2)
-workspace = 6, monitor:HDMI-A-1
-workspace = 7, monitor:HDMI-A-1
-workspace = 8, monitor:HDMI-A-1
-workspace = 9, monitor:HDMI-A-1
-workspace = 10, monitor:HDMI-A-1
-# For all categories, see https://wiki.hyprland.org/Configuring/Variables/
+-- For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 input {
 		kb_layout = gb
 		kb_variant = 
@@ -54,7 +48,7 @@ general {
 decoration {
 # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-	rounding = 0
+	rounding = 8
 
 		# drop_shadow = yes
 		# shadow_range = 4
@@ -68,14 +62,14 @@ animations {
 # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
 		bezier = wsfade, 0.34, 1.3, 0.64, 1
-		bezier = myBezier, 0.05, 0.9, 0.1, 1.00
+		bezier = myBezier, 0.05, 0.9, 0.1, 1.05
 
-		animation = windowsIn, 1, 1, wsfade, slide
-		animation = windowsOut, 1, 1, wsfade, slide
-		animation = border, 1, 1, default
-		animation = borderangle, 1, 1, default
-		animation = fade, 1, 1, default
-		animation = workspaces, 1, 1, wsfade
+		animation = windowsIn, 1, 7, wsfade, slide
+		animation = windowsOut, 1, 7, wsfade, slide
+		animation = border, 1, 10, default
+		animation = borderangle, 1, 8, default
+		animation = fade, 1, 7, default
+		animation = workspaces, 1, 7, wsfade
 
 }
 
