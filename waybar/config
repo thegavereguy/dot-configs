@@ -5,8 +5,8 @@
 									// "width": 1280, // Waybar width
 		"spacing": 0, // Gaps between modules (4px)
 									// Choose the order of the modules
-		"modules-left": ["hyprland/workspaces"],
-		"modules-center": [ "mpris"],
+		"modules-left": ["hyprland/workspaces", "mpris"],
+		"modules-center": [ ],
 		"modules-right": [ "pulseaudio", "network", "network#vpn", "cpu", "memory", "battery", "clock", "tray"],
 
 		"keyboard-state": {
@@ -33,7 +33,7 @@
 			"tooltip": true
 		},
 		"memory": {
-			"interval": 30,
+			"interval": 5,
     	"format": "{used:0.1f}G/{total:0.1f}G"
 		},
 		"temperature": {
@@ -65,7 +65,7 @@
 		},
 		"network": {
 			//"interface": "wlp5*", // (Optional) To force the use of this interface
-			"format-wifi": "{essid}    | D: {bandwidthDownBits} U: {bandwidthUpBits} ",
+			"format-wifi": "<i>{essid}</i>    | D: {bandwidthDownBits} U: {bandwidthUpBits} ",
 			"format-ethernet": "Eth. | D: {bandwidthDownBits} U: {bandwidthUpBits}",
 			"tooltip-format": "{ifname} via {gwaddr} ",
 			"format-linked": "{ifname} (No IP) ",
@@ -76,14 +76,13 @@
 		},
 		"network#vpn": {
 			"interface": "vpn*", // (Optional) To force the use of this interface
-			"format-ethernet": "VPN Conn. ",
+			"format-ethernet": "<i>VPN Conn.</i> ",
 			"format-linked": "{ifname} (No IP) ",
-			"format-disconnected": "No VPN ⚠",
+			"format-disconnected": "<i>No VPN ⚠</i>",
 			"format-alt": "{ifname}: {ipaddr}/{cidr}"
 		},
 
 		"pulseaudio": {
-			// "scroll-step": 1, // %, can be a float
 			"format": "{volume}% {icon}   | {format_source}",
 			"format-bluetooth": "{volume}% {icon} {format_source}",
 			"format-bluetooth-muted": " {icon} {format_source}",
@@ -92,11 +91,6 @@
 			"format-source-muted": "",
 			"format-icons": {
 				"headphone": "",
-				"hands-free": "",
-				"headset": "",
-				"phone": "",
-				"portable": "",
-				"car": "",
 				"default": ["", "", ""]
 			},
 			"on-click": "pavucontrol"
@@ -117,26 +111,9 @@
 			"dynamic-importance-order": ["title", "artist", "position", "length", "album"],
 			"dynamic-len": 65,
 		},
-		"image#album-art":{
-			"exec": "~/.config/waybar/cover.sh",
-			"size": 30,
-			"interval": 1,
-		},
-		"custom/media": {
-			"format": "{icon} {}",
-			"return-type": "json",
-			"max-length": 40,
-			"format-icons": {
-				"spotify": "",
-				"default": "🎜"
-			},
-			"escape": true,
-			"exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-																																 // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-		},
 		"hyprland/workspaces": {
 			"active-only":"true",
-			"format": "  {name}  ",
+			"format": " {name} ",
 			"format-icons": {
 				"active": "",
 				"default": ""
