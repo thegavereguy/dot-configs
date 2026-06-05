@@ -39,7 +39,7 @@ return {
 			ghost_text = { enabled = true },
 		},
 		keymap = {
-			["<space-Tab>"] = { "show" },
+			["<leader-Tab>"] = { "show" },
 			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-j>"] = { "select_next", "fallback" },
 			["<S-k>"] = { "scroll_documentation_up", "fallback" },

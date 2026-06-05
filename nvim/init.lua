@@ -1,4 +1,4 @@
 require("options")
-require("lazyinit")
 require("keymaps")
+require("lazyinit")
 require("theme")
