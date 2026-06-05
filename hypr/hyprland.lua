@@ -1,319 +1,189 @@
--- See https://wiki.hyprland.org/Configuring/Monitors/
+-- Hyprland v0.55 Lua Configuration
+
+local mainMod = "SUPER"
+
+--------------------------------------------------------------------------------
+-- MONITORS
+--------------------------------------------------------------------------------
 hl.monitor({
-		output = "eDP-1",
-		mode = "1920x1080@60",
-		pos = "0x0",
-		scale = 1,
-	})
-
-
--- See https://wiki.hyprland.org/Configuring/Keywords/ for more
-
--- Execute your favorite apps at launch
-exec-once = waybar & hyprpaper & swaync & hypridle
-
-exec-once=/usr/lib/polkit-kde-authentication-agent-1
-exec-once= systemctl --user enable --now hyprpolkitagent.service
-
-
--- For all categories, see https://wiki.hyprland.org/Configuring/Variables/
-input {
-		kb_layout = gb
-		kb_variant = 
-		kb_model =
-		kb_options =
-		kb_rules =
-
-		follow_mouse = 1
-
-		touchpad {
-			natural_scroll = no
-		}
-
-	sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-}
-
-general {
-# See https://wiki.hyprland.org/Configuring/Variables/ for more
-
-	gaps_in = 0
-		gaps_out = 0
-		border_size = 0
-		col.active_border = rgba(fac29aff)
-		col.inactive_border = rgba(595959aa)
-
-		layout = dwindle
-}
-
-decoration {
-# See https://wiki.hyprland.org/Configuring/Variables/ for more
-
-	rounding = 8
-
-		# drop_shadow = yes
-		# shadow_range = 4
-		# shadow_render_power = 3
-		# col.shadow = rgba(1a1a1aee)
-}
-
-animations {
-	enabled = yes
-
-# Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-
-		bezier = wsfade, 0.34, 1.3, 0.64, 1
-		bezier = myBezier, 0.05, 0.9, 0.1, 1.05
-
-		animation = windowsIn, 1, 7, wsfade, slide
-		animation = windowsOut, 1, 7, wsfade, slide
-		animation = border, 1, 10, default
-		animation = borderangle, 1, 8, default
-		animation = fade, 1, 7, default
-		animation = workspaces, 1, 7, wsfade
-
-}
-
-dwindle {
-# See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-	pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-		preserve_split = yes # you probably want this
-}
-
-master {
-# See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-#	new_is_master = true
-}
-
-gestures {
-# See https://wiki.hyprland.org/Configuring/Variables/ for more
-	#workspace_swipe = off
-}
-
-misc {
-	disable_hyprland_logo = true
-  force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
-}
-
-# Example per-device config
-# See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-# Example windowrule v1
-# windowrule = float, ^(kitty)$
-# Example windowrule v2
-# windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-
-
-# See https://wiki.hyprland.org/Configuring/Keywords/ for more
-$mainMod = SUPER
-
-# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = $mainMod, Q, exec, kitty
-bind = $mainMod, C, killactive
-bind = $mainMod, E, exec, dolphin
-bind = $mainMod, V, togglefloating,
-bind = $mainMod, P, exec, wofi --show drun
-bind = $mainMod, D, pseudo, # dwindle
-bind = $mainMod, S, togglesplit, # dwindle
-
-# Move focus with mainMod + arrow keys
-bind = $mainMod, H, movefocus, l
-bind = $mainMod, L, movefocus, r
-bind = $mainMod, K, movefocus, u
-bind = $mainMod, J, movefocus, d
-
-# Switch workspaces with mainMod + [0-9]
-bind = $mainMod, 1, workspace, 1
-bind = $mainMod, 2, workspace, 2
-bind = $mainMod, 3, workspace, 3
-bind = $mainMod, 4, workspace, 4
-bind = $mainMod, 5, workspace, 5
-bind = $mainMod, 6, workspace, 6
-bind = $mainMod, 7, workspace, 7
-bind = $mainMod, 8, workspace, 8
-bind = $mainMod, 9, workspace, 9
-bind = $mainMod, 0, workspace, 10
-# Move active window to a workspace with mainMod + SHIFT + [0-9]
-bind = $mainMod SHIFT, 1, movetoworkspace, 1
-bind = $mainMod SHIFT, 2, movetoworkspace, 2
-bind = $mainMod SHIFT, 3, movetoworkspace, 3
-bind = $mainMod SHIFT, 4, movetoworkspace, 4
-bind = $mainMod SHIFT, 5, movetoworkspace, 5
-bind = $mainMod SHIFT, 6, movetoworkspace, 6
-bind = $mainMod SHIFT, 7, movetoworkspace, 7
-bind = $mainMod SHIFT, 8, movetoworkspace, 8
-bind = $mainMod SHIFT, 9, movetoworkspace, 9
-bind = $mainMod SHIFT, 0, movetoworkspace, 10
-
-# Scroll through existing workspaces with mainMod + scroll
-bind = $mainMod, mouse_down, workspace, e+1
-bind = $mainMod, mouse_up, workspace, e-1
-
-# Move/resize windows with mainMod + LMB/RMB and dragging
-#
-bind = $mainMod SHIFT, H, movewindow, l
-bind = $mainMod SHIFT, J, movewindow, d
-bind = $mainMod SHIFT, K, movewindow, u
-bind = $mainMod SHIFT, L, movewindow, r
-
-bindm = $mainMod, mouse:272, movewindow
-bindm = $mainMod, mouse:273, resizewindow
-#screenshot e copia
-bind = SUPER_SHIFT,S,exec, grim -g "$(slurp)" - | wl-copy
-
-# toggle notification panel
-bind = $mainMod, N, exec, swaync-client -t
-
-# lock the screen
-bind = SUPER_SHIFT, Delete, exec, loginctl lock-session
-
-# volume contro
-bindel=, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-bindel=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-
-# brightness control
-bindel=, XF86MonBrightnessUp, exec,brightnessctl -d intel_backlight set 10%+ 
-bindel=, XF86MonBrightnessDown, exec,brightnessctl -d intel_backlight set 10%- 
-
-# toggle workspace preview
-# bind = $mainMod, TAB, overview:toggle
-
-plugin:dynamic-cursors {
-
-    # enables the plugin
-    enabled = true
-
-    # sets the cursor behaviour, supports these values:
-    # tilt    - tilt the cursor based on x-velocity
-    # rotate  - rotate the cursor based on movement direction
-    # stretch - stretch the cursor shape based on direction and velocity
-    # none    - do not change the cursors behaviour
-    mode = tilt
-
-    # minimum angle difference in degrees after which the shape is changed
-    # smaller values are smoother, but more expensive for hw cursors
-    threshold = 2
-
-    # override the mode behaviour per shape
-    # this is a keyword and can be repeated many times
-    # by default, there are no rules added
-    # see the dedicated `shape rules` section below!
-	# shaperule = <shape-name>, <mode> (optional), <property>: <value>, ...
-	#  shaperule = <shape-name>, <mode> (optional), <property>: <value>, ...
-
-    # for mode = rotate
-    rotate {
-
-        # length in px of the simulated stick used to rotate the cursor
-        # most realistic if this is your actual cursor size
-        length = 20
-
-        # clockwise offset applied to the angle in degrees
-        # this will apply to ALL shapes
-        offset = 0.0
-    }
-
-    # for mode = tilt
-    tilt {
-
-        # controls how powerful the tilt is, the lower, the more power
-        # this value controls at which speed (px/s) the full tilt is reached
-        # the full tilt being 60° in both directions
-        limit = 500
-
-        # relationship between speed and tilt, supports these values:
-        # linear             - a linear function is used
-        # quadratic          - a quadratic function is used (most realistic to actual air drag)
-        # negative_quadratic - negative version of the quadratic one, feels more aggressive
-        # see `activation` in `src/mode/utils.cpp` for how exactly the calculation is done
-        function = negative_quadratic
-
-        # time window (ms) over which the speed is calculated
-        # higher values will make slow motions smoother but more delayed
-        window = 100
-    }
-
-    # for mode = stretch
-    stretch {
-
-        # controls how much the cursor is stretched
-        # this value controls at which speed (px/s) the full stretch is reached
-        # the full stretch being twice the original length
-        limit = 3000
-
-        # relationship between speed and stretch amount, supports these values:
-        # linear             - a linear function is used
-        # quadratic          - a quadratic function is used
-        # negative_quadratic - negative version of the quadratic one, feels more aggressive
-        # see `activation` in `src/mode/utils.cpp` for how exactly the calculation is done
-        function = quadratic
-
-        # time window (ms) over which the speed is calculated
-        # higher values will make slow motions smoother but more delayed
-        window = 100
-    }
-
-    # configure shake to find
-    # magnifies the cursor if its is being shaken
-    shake {
-
-        # enables shake to find
-        enabled = false
-
-        # use nearest-neighbour (pixelated) scaling when shaking
-        # may look weird when effects are enabled
-        nearest = true
-
-        # controls how soon a shake is detected
-        # lower values mean sooner
-        threshold = 6.0
-
-        # magnification level immediately after shake start
-        base = 4.0
-        # magnification increase per second when continuing to shake
-        speed = 4.0
-        # how much the speed is influenced by the current shake intensitiy
-        influence = 0.0
-
-        # maximal magnification the cursor can reach
-        # values below 1 disable the limit (e.g. 0)
-        limit = 0.0
-
-        # time in millseconds the cursor will stay magnified after a shake has ended
-        timeout = 2000
-
-        # show cursor behaviour `tilt`, `rotate`, etc. while shaking
-        effects = false
-
-        # enable ipc events for shake
-        # see the `ipc` section below
-        ipc = false
-    }
-
-    # use hyprcursor to get a higher resolution texture when the cursor is magnified
-    # see the `hyprcursor` section below
-    hyprcursor {
-
-        # use nearest-neighbour (pixelated) scaling when magnifing beyond texture size
-        # this will also have effect without hyprcursor support being enabled
-        # 0 / false - never use pixelated scaling
-        # 1 / true  - use pixelated when no highres image
-        # 2         - always use pixleated scaling
-        nearest = true
-
-        # enable dedicated hyprcursor support
-        enabled = true
-
-        # resolution in pixels to load the magnified shapes at
-        # be warned that loading a very high-resolution image will take a long time and might impact memory consumption
-        # -1 means we use [normal cursor size] * [shake:base option]
-        resolution = -1
-
-        # shape to use when clientside cursors are being magnified
-        # see the shape-name property of shape rules for possible names
-        # specifying clientside will use the actual shape, but will be pixelated
-        fallback = clientside
-    }
-}
-debug {
-	disable_logs=false
-}
+	{ name = "eDP-1", resolution = "1920x1080@60", position = "0x0", scale = 1, mirror = true },
+	{ name = "HDMI-A-1", resolution = "1920x1080@60", position = "1920x0", scale = 1 },
+})
+
+--------------------------------------------------------------------------------
+-- AUTOSTART (exec-once)
+--------------------------------------------------------------------------------
+hl.on("hyprland.start", function()
+	hl.exec_cmd("waybar & hyprpaper & swaync & hypridle")
+	hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
+	hl.exec_cmd("systemctl --user enable --now hyprpolkitagent.service")
+end)
+
+--------------------------------------------------------------------------------
+-- WORKSPACE RULES
+--------------------------------------------------------------------------------
+-- Monitor 1
+for w = 1, 5 do
+	hl.workspace_rule({ workspace = tostring(w), monitor = "eDP-1" })
+end
+
+-- Monitor 2
+for w = 6, 10 do
+	hl.workspace_rule({ workspace = tostring(w), monitor = "HDMI-A-1" })
+end
+
+--------------------------------------------------------------------------------
+-- MAIN CONFIGURATION
+--------------------------------------------------------------------------------
+hl.config({
+	input = {
+		kb_layout = "gb",
+		kb_variant = "",
+		kb_model = "",
+		kb_options = "",
+		kb_rules = "",
+		follow_mouse = 1,
+		touchpad = {
+			natural_scroll = false,
+		},
+		sensitivity = 0,
+	},
+
+	general = {
+		gaps_in = 0,
+		gaps_out = 0,
+		border_size = 0,
+		col = {
+			active_border = "rgba(fac29aff)",
+			inactive_border = "rgba(595959aa)",
+		},
+		layout = "dwindle",
+	},
+
+	decoration = {
+		rounding = 0,
+		-- drop_shadow and other deprecated shadow variants commented out
+	},
+
+	dwindle = {
+		-- pseudotile = true -> REMOVED: dropped in v0.55 breaking changes
+		preserve_split = true,
+	},
+
+	master = {
+		-- new_is_master = true
+	},
+
+	gestures = {
+		-- workspace_swipe = false
+	},
+
+	misc = {
+		disable_hyprland_logo = true,
+		force_default_wallpaper = -1,
+	},
+
+	debug = {
+		disable_logs = false,
+	},
+})
+
+--------------------------------------------------------------------------------
+-- ANIMATIONS & BEZIERS
+--------------------------------------------------------------------------------
+hl.curve("wsfade", { type = "bezier", points = { { 0.34, 1.3 }, { 0.64, 1 } } })
+hl.curve("myBezier", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.00 } } })
+
+hl.animation("windowsIn", { duration = 1, speed = 1, curve = "wsfade", style = "slide" })
+hl.animation("windowsOut", { duration = 1, speed = 1, curve = "wsfade", style = "slide" })
+hl.animation("border", { duration = 1, speed = 1, curve = "default" })
+hl.animation("borderangle", { duration = 1, speed = 1, curve = "default" })
+hl.animation("fade", { duration = 1, speed = 1, curve = "default" })
+hl.animation("workspaces", { duration = 1, speed = 1, curve = "wsfade" })
+
+--------------------------------------------------------------------------------
+-- KEYBINDS
+--------------------------------------------------------------------------------
+
+-- Standard binds
+hl.bind(mainMod .. " + Q", hl.dsp.exec("kitty"))
+hl.bind(mainMod .. " + C", hl.dsp.killactive())
+hl.bind(mainMod .. " + E", hl.dsp.exec("dolphin"))
+hl.bind(mainMod .. " + V", hl.dsp.togglefloating())
+hl.bind(mainMod .. " + P", hl.dsp.exec("wofi --show drun"))
+hl.bind(mainMod .. " + D", hl.dsp.pseudo())
+hl.bind(mainMod .. " + S", hl.dsp.togglesplit())
+
+-- Move Focus
+hl.bind(mainMod .. " + H", hl.dsp.movefocus("l"))
+hl.bind(mainMod .. " + L", hl.dsp.movefocus("r"))
+hl.bind(mainMod .. " + K", hl.dsp.movefocus("u"))
+hl.bind(mainMod .. " + J", hl.dsp.movefocus("d"))
+
+-- Move Window Directionally
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.movewindow("l"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.movewindow("r"))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.movewindow("u"))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.movewindow("d"))
+
+-- Switch Workspaces & Move Windows to Workspaces (Lua Loop!)
+for i = 1, 10 do
+	local ws = tostring(i)
+	local key = tostring(i % 10) -- Maps 10 to key "0"
+
+	-- Switch to workspace
+	hl.bind(mainMod .. " + " .. key, hl.dsp.workspace(ws))
+	-- Move active window to workspace
+	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.movetoworkspace(ws))
+end
+
+-- Mouse scroll through workspaces
+hl.bind(mainMod .. " + mouse_down", hl.dsp.workspace("e+1"))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.workspace("e-1"))
+
+-- Move / Resize windows (Mouse)
+hl.bind(mainMod .. " + mouse:272", hl.dsp.movewindow(), { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.resizewindow(), { mouse = true })
+
+-- Screenshot / Copy
+hl.bind("SUPER_SHIFT + S", hl.dsp.exec('grim -g "$(slurp)" - | wl-copy'))
+
+-- Notifications & Lock Screen
+hl.bind(mainMod .. " + N", hl.dsp.exec("swaync-client -t"))
+hl.bind("SUPER_SHIFT + Delete", hl.dsp.exec("loginctl lock-session"))
+
+-- Audio & Media Controls (Using repeating/locked flags via bindel -> { repeating = true, locked = true })
+local mediaFlags = { repeating = true, locked = true }
+
+hl.bind(
+	"XF86AudioRaiseVolume",
+	hl.dsp.exec(
+		'wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+ && canberra-gtk-play -i audio-volume-change -d "change volume"'
+	),
+	mediaFlags
+)
+hl.bind(
+	"XF86AudioLowerVolume",
+	hl.dsp.exec(
+		'wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%- && canberra-gtk-play -i audio-volume-change -d "change volume"'
+	),
+	mediaFlags
+)
+hl.bind(
+	"XF86AudioMute",
+	hl.dsp.exec(
+		'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && canberra-gtk-play -i audio-volume-change -d "change volume"'
+	),
+	mediaFlags
+)
+hl.bind(
+	"XF86AudioMicMute",
+	hl.dsp.exec(
+		'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && canberra-gtk-play -i audio-volume-change -d "change volume"'
+	),
+	mediaFlags
+)
+
+-- Brightness Controls
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec("brightnessctl -d intel_backlight set 10%+"), mediaFlags)
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec("brightnessctl -d intel_backlight set 10%-"), mediaFlags)
