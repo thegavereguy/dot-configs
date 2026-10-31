@@ -12,7 +12,11 @@ return {
 			picker = { enabled = true },
 			quickfile = { enabled = true },
 			scope = { enabled = true },
-			image = { enabled = true },
+			-- Disable image on nvim >= 0.12 if the treesitter runtime
+			-- still references the removed set_timeout method.
+			-- Remove this check once snacks.nvim is updated or
+			-- you're on a stable 0.12.0+ build.
+			image = { enabled = vim.fn.has("nvim-0.12") == 0 },
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 		},

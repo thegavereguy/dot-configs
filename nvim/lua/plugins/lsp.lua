@@ -4,7 +4,13 @@ return {
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
 		config = function()
 			require("mason").setup()
-			require("mason-lspconfig").setup({ automatic_enable = true })
+			require("mason-lspconfig").setup({
+				ensure_installed = { "texlab" },
+				-- `cmake-language-server` (lspconfig name "cmake") is broken with the
+				-- pygls 1.x that Mason installs (ImportError: cannot import name
+				-- 'LanguageServer'), so neocmakelsp handles CMake instead.
+				automatic_enable = { exclude = { "cmake" } },
+			})
 		end,
 	},
 	{
@@ -27,84 +33,78 @@ return {
 					},
 				},
 			})
-			vim.lsp.config("mlir-lsp", {
-				cmd = { "mlir-lsp-server" },
-
-				filetypes = { "mlir" },
+			-- CMake: neocmakelsp (installed via `:MasonInstall neocmakelsp`).
+			-- Enabled by mason-lspconfig; tuned in .neocmake.toml per project.
+			vim.lsp.config("neocmake", {
+				root_markers = { ".neocmake.toml", "CMakePresets.json", ".git", "build", "cmake" },
+				init_options = {
+					format = { enable = true },
+					lint = { enable = true },
+				},
 			})
 		end,
 	},
 	{
-		"glepnir/lspsaga.nvim",
-
+		"ray-x/navigator.lua",
+		dependencies = { "ray-x/guihua.lua" },
 		config = function()
-			require("lspsaga").setup({
-				ui = {
-					theme = "round",
-					title = true,
-					border = "none",
-					winblend = 0,
+			require("navigator").setup({
+				-- nvim-lspconfig and mason own the LSP servers; navigator only
+				-- adds the navigation UI on top of the clients they start.
+				lsp = {
+					enable = true,
+					disable_lsp = "all",
+					-- conform.nvim already formats on BufWritePre.
+					format_on_save = false,
 				},
-				lightbulb = { enable = false },
+				-- blink.cmp provides signature help while inserting.
+				lsp_signature_help = false,
+				-- Keymaps are declared in lua/keymaps.lua. navigator's defaults
+				-- would clash with existing maps (<C-k>, <Space>, ...).
+				default_mapping = false,
+				border = "rounded",
+				transparency = 100, -- 100 disables the mask (opaque floats)
+				-- Strip the emoji navigator hardcodes into its UI. `icons = false`
+				-- only clears the diagnostic list heads and sign glyphs; the rest
+				-- are read unconditionally, so they must be blanked explicitly.
+				icons = {
+					icons = false,
+					code_action_icon = "",
+					code_lens_action_icon = "",
+					diagnostic_head = "",
+					diagnostic_err = "",
+					diagnostic_warn = "",
+					diagnostic_info = "",
+					diagnostic_hint = "",
+					diagnostic_head_severity_1 = "",
+					diagnostic_head_severity_2 = "",
+					diagnostic_head_severity_3 = "",
+					diagnostic_head_description = "",
+					diagnostic_virtual_text = "",
+					diagnostic_file = "",
+					value_definition = "",
+					value_changed = "",
+					treesitter_defult = "",
+					fold = { prefix = "", separator = "" },
+					-- Only the emoji entries; the nerd font glyphs stay as they are.
+					match_kinds = {
+						associated = "",
+						namespace = "",
+						field = "",
+						module = "",
+						flag = "",
+					},
+				},
 			})
 		end,
 	},
 	{ "folke/trouble.nvim", opts = {} },
 	{
-		"nvim-treesitter/nvim-treesitter",
-
+		"romus204/tree-sitter-manager.nvim",
+		dependencies = {}, -- tree-sitter CLI must be installed system-wide
 		config = function()
-			require("nvim-treesitter.configs").setup({
+			require("tree-sitter-manager").setup({
 				auto_install = true,
-				ignore_install = {},
-				sync_install = false,
-				modules = {},
-				ensure_installed = {
-					"lua",
-					"vim",
-					"go",
-					"toml",
-					"css",
-					"tsx",
-					"css",
-					"html",
-					"lua",
-					"norg",
-				},
-				highlight = {
-					enable = true,
-					use_languagetree = true,
-					additional_vim_regex_highlighting = false,
-					disable = function(lang, buf)
-						local max_filesize = 100 * 1024 -- 100 KB
-						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-						if ok and stats and stats.size > max_filesize then
-							return true
-						end
-					end,
-				},
-
-				autotag = {
-					enable = true,
-					filetypes = {
-						"html",
-						"javascript",
-						"typescript",
-						"javascriptreact",
-						"typescriptreact",
-						"svelte",
-						"vue",
-						"tsx",
-						"jsx",
-						"rescript",
-						"css",
-						"lua",
-						"xml",
-						"php",
-						"markdown",
-					},
-				},
-				indent = { enable = true },
 			})
 		end,
 	},

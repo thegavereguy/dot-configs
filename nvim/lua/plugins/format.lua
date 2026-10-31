@@ -10,6 +10,7 @@ return {
 				cpp = { "clang-format" },
 				c = { "clang-format" },
 				cmake = { "gersemi" },
+				tex = { "tex-fmt" },
 			},
 		},
 	},

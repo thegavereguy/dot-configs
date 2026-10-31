@@ -1,22 +1,11 @@
-require("cmp").setup.buffer({
-	formatting = {
-		format = function(entry, vim_item)
-			print(entry.source.name)
-			vim_item.menu = ({
-				omni = (vim.inspect(vim_item.menu):gsub('%"', "")),
-				buffer = "[Buffer]",
-				luasnip = "[LuaSnip]",
-				nvim_lsp = "[LSP]",
-				-- formatting for other sources
-			})[entry.source.name]
-			return vim_item
-		end,
-	},
-	sources = {
-		{ name = "omni" },
-		{ name = "buffer" },
-		{ name = "luasnip" },
-		-- { name = 'nvim_lsp', group_index= 1}
-		-- other sources
-	},
-})
+-- LaTeX buffer settings.
+-- Completion is provided by blink.cmp (see lua/plugins/completion.lua);
+-- compilation/viewing + omni completion come from vimtex (lua/plugins/latex.lua).
+-- vimtex defaults (localleader is ","): ,ll compile · ,lv view · ,le errors
+--                                        ,lk stop   · ,lt toc  · ,lc clean
+
+vim.opt_local.wrap = true
+vim.opt_local.linebreak = true
+vim.opt_local.spell = true
+vim.opt_local.spelllang = { "en", "it" }
+vim.opt_local.conceallevel = 0

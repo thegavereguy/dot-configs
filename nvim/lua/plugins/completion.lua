@@ -51,6 +51,10 @@ return {
 
 		sources = {
 			default = { "copilot", "lsp", "path", "snippets" },
+			-- LaTeX: also pull words from the current buffer while writing prose.
+			per_filetype = {
+				tex = { "copilot", "lsp", "path", "buffer", "snippets" },
+			},
 			providers = {
 				copilot = {
 					name = "copilot",

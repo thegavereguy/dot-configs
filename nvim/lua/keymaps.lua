@@ -47,24 +47,52 @@ keymap("n", "tn", ":tabnext<CR>", opts)
 keymap("n", "tp", ":tabprevious<CR>", opts)
 keymap("n", "tc", ":tabclose<CR>", opts)
 
--- NerdTREE
--- keymap("n", "<C-N>", ":NERDTreeToggleVCS<CR>", opts)
-
 -- NvimTree
 keymap("n", "<C-N>", ":NvimTreeToggle<CR>", opts)
 
--- LspSaga
-keymap("n", "rn", ":Lspsaga rename<CR>", opts)
-keymap("n", "gi", ":Lspsaga finder<CR>", opts)
-keymap("n", "ca", ":Lspsaga code_action<CR>", opts)
-keymap("n", "gd", ":Lspsaga peek_definition<CR>", opts)
-keymap("n", "gD", ":Lspsaga peek_type_definition<CR>", opts)
-keymap("n", "<leader>gd", ":Lspsaga goto_definition<CR>", opts)
-keymap("n", "<leader>gD", ":Lspsaga goto_type_definition<CR>", opts)
-keymap("n", "<leader>sb", ":Lspsaga show_buf_diagnostics<CR>", opts)
-keymap("n", "<leader>sw", ":Lspsaga show_workspace_diagnostics<CR>", opts)
-keymap("n", "<leader>k", ":Lspsaga hover_doc<CR>", opts)
-keymap("n", "<leader>o", ":Lspsaga outline<CR>", opts)
+-- Navigator (LSP UI)
+-- Mappings live here rather than in navigator's defaults, which would clash
+-- with existing maps such as <C-k> and the <Space> no-op.
+local nav = function(module, method, arg)
+	return function()
+		local mod = require("navigator." .. module)
+		if arg ~= nil then
+			mod[method](arg)
+		else
+			mod[method]()
+		end
+	end
+end
+
+vim.keymap.set("n", "rn", nav("rename", "rename"), { silent = true, desc = "Rename symbol" })
+vim.keymap.set("n", "gi", nav("reference", "async_ref"), { silent = true, desc = "Finder (definitions + references)" })
+-- Not navigator.codeAction: it sends vim.Diagnostic objects as the LSP
+-- CodeActionContext, which servers reject (nvim 0.12 expects the raw LSP
+-- diagnostics in `user_data.lsp`). Neovim builds a correct context itself.
+vim.keymap.set({ "n", "v" }, "ca", vim.lsp.buf.code_action, { silent = true, desc = "Code action" })
+vim.keymap.set("n", "gd", nav("definition", "definition_preview", 1000), { silent = true, desc = "Peek definition" })
+vim.keymap.set(
+	"n",
+	"gD",
+	nav("definition", "type_definition_preview", 1000),
+	{ silent = true, desc = "Peek type definition" }
+)
+vim.keymap.set("n", "<leader>gd", nav("definition", "definition"), { silent = true, desc = "Goto definition" })
+vim.keymap.set("n", "<leader>gD", vim.lsp.buf.type_definition, { silent = true, desc = "Goto type definition" })
+vim.keymap.set(
+	"n",
+	"<leader>sb",
+	nav("diagnostics", "show_buf_diagnostics"),
+	{ silent = true, desc = "Buffer diagnostics" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>sw",
+	nav("diagnostics", "show_diagnostics"),
+	{ silent = true, desc = "Workspace diagnostics" }
+)
+vim.keymap.set("n", "K", nav("hover", "hover"), { silent = true, desc = "Hover documentation" })
+vim.keymap.set("n", "<leader>o", nav("symbols", "side_panel"), { silent = true, desc = "Outline (LSP symbols)" })
 
 -- Floaterm
 -- keymap("n", "<leader>d", ":lua require('floaterm').toggle()<CR>", opts)

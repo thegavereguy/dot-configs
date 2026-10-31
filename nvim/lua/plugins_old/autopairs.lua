@@ -1,7 +1,0 @@
-local apairs = require("nvim-autopairs")
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local cmp = require("cmp")
-
-apairs.setup({})
-
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
