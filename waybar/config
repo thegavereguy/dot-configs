@@ -9,15 +9,6 @@
 		"modules-center": [ ],
 		"modules-right": [ "pulseaudio", "network", "network#vpn", "cpu", "memory", "battery", "clock", "tray"],
 
-		"keyboard-state": {
-			"numlock": true,
-			"capslock": true,
-			"format": "{name} {icon}",
-			"format-icons": {
-				"locked": "",
-				"unlocked": ""
-			}
-		},
 		"tray": {
 			// "icon-size": 21,
 			"spacing": 10
@@ -30,7 +21,8 @@
 		"cpu": {
 			"interval": 1,
 			"format": "{usage}% {avg_frequency}Ghz",
-			"tooltip": true
+			"tooltip": true,
+			"min-length": 12
 		},
 		"memory": {
 			"interval": 5,
@@ -43,11 +35,6 @@
 			// "format-critical": "{temperatureC}°C {icon}",
 			"format": "{temperatureC}°C {icon}",
 			"format-icons": ["", "", ""]
-		},
-		"backlight": {
-			// "device": "acpi_video1",
-			"format": "{percent}% {icon}",
-			"format-icons": ["", "", "", "", "", "", "", "", ""]
 		},
 		"battery": {
 			"states": {
@@ -65,21 +52,23 @@
 		},
 		"network": {
 			//"interface": "wlp5*", // (Optional) To force the use of this interface
-			"format-wifi": "<i>{essid}</i>    | D: {bandwidthDownBits} U: {bandwidthUpBits} ",
-			"format-ethernet": "Eth. | D: {bandwidthDownBits} U: {bandwidthUpBits}",
+			"format-wifi": "<i>{essid}</i>   {bandwidthDownBits} / {bandwidthUpBits}",
+			"format-ethernet": "eth {bandwidthDownBits} / {bandwidthUpBits}",
 			"tooltip-format": "{ifname} via {gwaddr} ",
 			"format-linked": "{ifname} (No IP) ",
 			"format-disconnected": "Disconnected ⚠",
 			"on-click-middle": "kitty nmtui",
 			"format-alt": "{ifname}: {ipaddr}/{cidr}",
-			"interval" : 1
+			"interval" : 1,
+			"min-length": 25
 		},
 		"network#vpn": {
 			"interface": "vpn*", // (Optional) To force the use of this interface
 			"format-ethernet": "<i>VPN Conn.</i> ",
 			"format-linked": "{ifname} (No IP) ",
 			"format-disconnected": "<i>No VPN ⚠</i>",
-			"format-alt": "{ifname}: {ipaddr}/{cidr}"
+			"format-alt": "{ifname}: {ipaddr}/{cidr}",
+			"min-length": 8
 		},
 
 		"pulseaudio": {
