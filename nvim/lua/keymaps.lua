@@ -102,3 +102,26 @@ vim.keymap.set("n", "<leader>o", nav("symbols", "side_panel"), { silent = true, 
 keymap("n", "<leader>cmr", ":CMakeRun<CR>", opts)
 keymap("n", "<leader>cmb", ":CMakeBuild<CR>", opts)
 keymap("n", "<leader>cmt", ":CMakeRunTest<CR>", opts)
+
+-- Toggleterm: numbered terminals
+local function term_map(lhs, fn, desc)
+	vim.keymap.set({ "n", "t" }, lhs, fn, { silent = true, desc = desc })
+end
+
+for i = 1, 9 do
+	term_map("<leader>t" .. i, function()
+		require("terminals").open(i)
+	end, "Terminal " .. i .. ": open/toggle")
+end
+term_map("<leader>tn", function()
+	require("terminals").cycle(1)
+end, "Terminal: next")
+term_map("<leader>tp", function()
+	require("terminals").cycle(-1)
+end, "Terminal: previous")
+term_map("<leader>tN", function()
+	require("terminals").new()
+end, "Terminal: new")
+term_map("<leader>tl", function()
+	require("terminals").picker()
+end, "Terminal: list")
