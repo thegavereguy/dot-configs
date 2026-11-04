@@ -66,13 +66,13 @@
 			"interface": "vpn*", // (Optional) To force the use of this interface
 			"format-ethernet": "<i>VPN Conn.</i> ",
 			"format-linked": "{ifname} (No IP) ",
-			"format-disconnected": "<i>No VPN ⚠</i>",
+			"format-disconnected": "<i>No VPN</i>",
 			"format-alt": "{ifname}: {ipaddr}/{cidr}",
 			"min-length": 8
 		},
 
 		"pulseaudio": {
-			"format": "{volume}% {icon}   | {format_source}",
+			"format": "{volume}% {icon} | {format_source}",
 			"format-bluetooth": "{volume}% {icon} {format_source}",
 			"format-bluetooth-muted": " {icon} {format_source}",
 			"format-muted": " {format_source}",
@@ -89,9 +89,6 @@
 			"format-paused": "{status_icon} <i>{dynamic}</i>",
 			"player-icons": {
 				"default": "▶",
-				"tidal-hifi" : "🎵",
-				"mpv": "🎵",
-				"strawberry": "󱁂 "
 			},
 			"status-icons": {
 				"paused": "",
